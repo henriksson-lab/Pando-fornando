@@ -230,6 +230,16 @@ fit_xgb <- function(
     }
     model_mat <- stats::model.matrix(formula, data=data)
     response <- data[[formula[[2]]]]
+
+
+print("----------------- formula")
+print(formula)
+print("----------------- formula2")
+print(formula[[2]])
+print("----------------- response")
+print(response)
+
+
     fit <- xgboost::xgboost(
         data = model_mat,
         label = response,
