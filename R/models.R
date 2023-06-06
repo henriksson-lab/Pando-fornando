@@ -239,6 +239,7 @@ print(formula[[2]])
 print("----------------- response")
 print(response)
 
+stop("boho")
 
     fit <- xgboost::xgboost(
         data = model_mat,
