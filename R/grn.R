@@ -383,6 +383,9 @@ fit_grn_models.SeuratPlus <- function(
     }
     gof <- map_dfr(model_fits, function(x) x$gof, .id='target')
 
+    #models
+    list_models <- map_dfr(model_fits, function(x) x$model, .id='target')
+
     params <- list()
     params[['method']] <- method
     params[['family']] <- family
@@ -397,6 +400,8 @@ fit_grn_models.SeuratPlus <- function(
         features = features,
         coefs = coefs,
         fit = gof,
+#new
+        list_models = list_models,   
         params = params
     )
     object@grn@networks[[network_name]] <- network_obj

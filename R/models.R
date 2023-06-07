@@ -68,7 +68,8 @@ fit_glm <- function(formula, data, family=gaussian, ...){
     )
     coefs <- as_tibble(s$coefficients, rownames='term')
     colnames(coefs) <- c('term', 'estimate', 'std_err', 'statistic', 'pval')
-    return(list(gof=gof, coefs=coefs))
+#added model here
+    return(list(gof=gof, coefs=coefs, model=fit))
 }
 
 
@@ -231,15 +232,19 @@ fit_xgb <- function(
     model_mat <- stats::model.matrix(formula, data=data)
     response <- data[[formula[[2]]]]
 
-
+if(FALSE){
+print("----------------- model")
+print(head(model_mat))
+print("----------------- data")
+print(head(data))
 print("----------------- formula")
 print(formula)
 print("----------------- formula2")
 print(formula[[2]])
 print("----------------- response")
-print(response)
-
+print(head(response))
 stop("boho")
+}
 
     fit <- xgboost::xgboost(
         data = model_mat,
@@ -256,7 +261,8 @@ stop("boho")
     )
     coefs <- as_tibble(as.data.frame(xgboost::xgb.importance(model=fit)))
     colnames(coefs) <- c('term', 'gain', 'cover', 'frequency')
-    return(list(gof=gof, coefs=coefs))
+#added model here
+    return(list(gof=gof, coefs=coefs, model=fit))
 }
 
 
