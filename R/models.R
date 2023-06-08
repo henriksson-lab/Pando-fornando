@@ -256,13 +256,22 @@ stop("boho")
         ...
     )
     y_pred <- predict(fit, newdata=model_mat)
+
+#
+#print("shap!")
+    y_shap <- predict(fit, newdata=model_mat, predcontrib = TRUE)
+#print("shap!")
+#print(y_shap)
+
     gof <- tibble(
         rsq = r2(response, y_pred)
     )
     coefs <- as_tibble(as.data.frame(xgboost::xgb.importance(model=fit)))
     colnames(coefs) <- c('term', 'gain', 'cover', 'frequency')
-#added model here
-    return(list(gof=gof, coefs=coefs, model=fit))
+#added model here. also added data but this is cruel!
+    return(list(gof=gof, coefs=coefs, model=fit,  
+#data=model_mat, 
+shap=y_shap  ))
 }
 
 

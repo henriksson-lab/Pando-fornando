@@ -383,8 +383,6 @@ fit_grn_models.SeuratPlus <- function(
     }
     gof <- map_dfr(model_fits, function(x) x$gof, .id='target')
 
-    #models
-    list_models <- map_dfr(model_fits, function(x) x$model, .id='target')
 
     params <- list()
     params[['method']] <- method
@@ -395,13 +393,21 @@ fit_grn_models.SeuratPlus <- function(
     params[['tf_cor']] <- tf_cor
     params[['peak_cor']] <- peak_cor
 
+    #new
+    print(head(model_fits))
+    list_models <- model_fits
+#$model
+    params[['xgb']] <- lapply(list_models, function(x) x$model)
+#    params[['data']] <- lapply(list_models, function(x) x$data)
+    params[['shap']] <- lapply(list_models, function(x) x$shap)
+
     network_obj <- new(
         Class = 'Network',
         features = features,
         coefs = coefs,
         fit = gof,
 #new
-        list_models = list_models,   
+#        list_models = list_models,   
         params = params
     )
     object@grn@networks[[network_name]] <- network_obj
