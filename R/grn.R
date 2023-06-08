@@ -394,7 +394,7 @@ fit_grn_models.SeuratPlus <- function(
     params[['peak_cor']] <- peak_cor
 
     #new
-    print(head(model_fits))
+    #print(head(model_fits))
     list_models <- model_fits
 #$model
     params[['xgb']] <- lapply(list_models, function(x) x$model)
