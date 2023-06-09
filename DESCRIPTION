@@ -1,5 +1,5 @@
 Package: Nando
-Version: 1.0.5.13
+Version: 1.0.5.14
 Type: Package
 Title: Inferring regulomes from multi-modal single-cell genomics data
 Authors@R: person(given = "Jonas Simon",

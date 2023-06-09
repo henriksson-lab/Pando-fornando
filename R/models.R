@@ -263,15 +263,27 @@ stop("boho")
 #print("shap!")
 #print(y_shap)
 
+
+the_gene <- formula[[2]]
+print(paste("the gene", the_gene))
+
+saveRDS(fit,file=paste("model",the_gene,".RDS"))
+saveRDS(y_shap,file=paste("shap",the_gene,".RDS"))
+
+
     gof <- tibble(
         rsq = r2(response, y_pred)
     )
     coefs <- as_tibble(as.data.frame(xgboost::xgb.importance(model=fit)))
     colnames(coefs) <- c('term', 'gain', 'cover', 'frequency')
 #added model here. also added data but this is cruel!
-    return(list(gof=gof, coefs=coefs, model=fit,  
+    return(list(gof=gof, coefs=coefs
+#, model=fit,  
 #data=model_mat, 
-shap=y_shap  ))
+#shap=y_shap  
+
+
+))
 }
 
 
