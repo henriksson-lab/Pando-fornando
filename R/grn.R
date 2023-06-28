@@ -247,12 +247,17 @@ fit_grn_models.SeuratPlus <- function(
             only_tss = FALSE
         )
     }
+log_message('666 1', verbose=verbose)
 
     peaks2gene <- aggregate_matrix(t(peaks_near_gene), groups=colnames(peaks_near_gene), fun='sum')
+
+log_message('666 2', verbose=verbose)
 
     # Select peaks passing criteria
     peaks_at_gene <- as.logical(colMaxs(peaks2gene))
     peaks_with_motif <- as.logical(rowMaxs(peaks2motif*1))
+
+log_message('666 3', verbose=verbose)
 
     # Subset data to good peaks
     peaks_use <- peaks_at_gene & peaks_with_motif

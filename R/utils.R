@@ -46,20 +46,25 @@ find_peaks_near_genes <- function(
 
     if (method=='Signac'){
 
+log_message('668 1', verbose=verbose)
+
         if (only_tss){
             genes <- IRanges::resize(x = genes, width = 1, fix = 'start')
         }
+log_message('668 2', verbose=verbose)
         genes_extended <- suppressWarnings(
             expr = Signac::Extend(
                 genes, upstream = upstream, downstream = downstream
             )
         )
+log_message('668 3', verbose=verbose)
         overlaps <- IRanges::findOverlaps(
             query = peaks,
             subject = genes_extended,
             type = 'any',
             select = 'all'
         )
+log_message('668 3', verbose=verbose)
         hit_matrix <- Matrix::sparseMatrix(
             i = S4Vectors::queryHits(overlaps),
             j = S4Vectors::subjectHits(overlaps),
